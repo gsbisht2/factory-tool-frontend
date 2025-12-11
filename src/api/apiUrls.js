@@ -1,0 +1,19 @@
+const FACTORY_TOOL_URL = import.meta.env.VITE_FACTORY_TOOL_URL;
+const PLATFORM_URL = import.meta.env.VITE_PLATFORM_URL;
+export const login = `${PLATFORM_URL}/api/auth/login`;
+export const refresh = `${FACTORY_TOOL_URL}/api/auth/refresh`;
+export const logout = `${FACTORY_TOOL_URL}/api/auth/logout/`;
+export const getAccessToken = `${FACTORY_TOOL_URL}/api/jwt/access-token/`;
+
+export const groupDetails = `${FACTORY_TOOL_URL}/api/group/details`;
+export const deviceDetails = `${FACTORY_TOOL_URL}/api/device/details`;
+export const changeDeviceGroup = `${FACTORY_TOOL_URL}/api/device/{device_id}/change-group/`;
+export const modbusConfigDetails = `${FACTORY_TOOL_URL}/api/modbus-config/details`;
+export const modifyConfig = `${FACTORY_TOOL_URL}/api/modbus-config/{config_id}/modify/`;
+export const patchesDetails = `${FACTORY_TOOL_URL}/api/patch/patches`;
+export const modifyPatch = `${FACTORY_TOOL_URL}/api/patch/{patch_id}/modify/`;
+export const addNewGroup = `${FACTORY_TOOL_URL}/api/group/groups/`;
+export const deleteGroup = `${FACTORY_TOOL_URL}/api/group/groups/{group_id}/`;
+export const getUsers = `${FACTORY_TOOL_URL}/api/auth/users/`;
+export const addNewuser = `${FACTORY_TOOL_URL}/api/auth/users/`;
+export const editGroup = `${FACTORY_TOOL_URL}/api/group/groups/{group_id}/modify/`;

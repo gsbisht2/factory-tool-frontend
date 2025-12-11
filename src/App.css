@@ -1,0 +1,40 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap");
+body {
+  font-family: "DM Sans", sans-serif;
+}
+
+option {
+  color: black;
+}
+
+/* Fix for Google Autocomplete dropdown inside modals */
+.pac-container {
+  z-index: 2147483647 !important; /* Very high */
+  position: absolute !important;
+}
+
+/* Override Google Places Autocomplete styles */
+.pac-container {
+  z-index: 2000 !important; /* Make sure it's above other modals */
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  font-family: "Inter", sans-serif; /* Or your desired font */
+}
+
+/* Style each suggestion */
+.pac-item {
+  padding: 10px;
+  font-size: 14px;
+  color: #333;
+}
+
+/* Highlighted suggestion */
+.pac-item-selected {
+  background-color: #f0f0f0 !important;
+}
+
+/* The address text */
+.pac-item .pac-item-query {
+  font-weight: 500;
+  color: #1a202c; /* Darker for visibility */
+}
