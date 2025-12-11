@@ -73,10 +73,10 @@ const Auth = () => {
         localStorage.setItem("refreshToken", data.refreshToken);
 
         // Send platform_url instead of token
-        const resp = await axiosInstance.post(getAccessToken, {
-          platform_url: "https://platform.uniqgrid.com/api",
-        });
-        localStorage.setItem("UGXAuthorization", resp.data.access_token);
+        // const resp = await axiosInstance.post(getAccessToken, {
+        //   platform_url: "https://platform.uniqgrid.com/api",
+        // });
+        // localStorage.setItem("UGXAuthorization", resp.data.access_token);
 
         toast.success("Logged in successfully");
         navigate("/groups", { replace: true });

@@ -1,8 +1,8 @@
 const FACTORY_TOOL_URL = import.meta.env.VITE_FACTORY_TOOL_URL;
 const PLATFORM_URL = import.meta.env.VITE_PLATFORM_URL;
 export const login = `${PLATFORM_URL}/api/auth/login`;
-export const refresh = `${FACTORY_TOOL_URL}/api/auth/refresh`;
-export const logout = `${FACTORY_TOOL_URL}/api/auth/logout/`;
+export const refresh = `${PLATFORM_URL}/api/auth/refresh`;
+export const logout = `${PLATFORM_URL}/api/auth/logout/`;
 export const getAccessToken = `${FACTORY_TOOL_URL}/api/jwt/access-token/`;
 
 export const groupDetails = `${FACTORY_TOOL_URL}/api/group/details`;
