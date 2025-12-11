@@ -79,7 +79,7 @@ const Auth = () => {
         localStorage.setItem("UGXAuthorization", resp.data.access_token);
 
         toast.success("Logged in successfully");
-        navigate("/groups");
+        navigate("/groups", { replace: true });
       }
     } catch (error) {
       console.error("Login error:", error);

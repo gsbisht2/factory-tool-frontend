@@ -17,7 +17,7 @@ function App() {
   const bg = useColorModeValue("white", "navy.700");
   const color = useColorModeValue("gray.800", "white");
   const location = useLocation();
-  const isLoginPage = location.pathname === "/";
+  const isLoginPage = location.pathname === "/login";
 
   return (
     <>

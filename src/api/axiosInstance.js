@@ -46,7 +46,7 @@ axiosInstance.interceptors.response.use(
       } catch {
         localStorage.removeItem("authToken");
         localStorage.removeItem("refreshToken");
-        window.location.href = "/auth/sign-in";
+        window.location.href = "/login";
       }
     }
 

@@ -1,5 +1,6 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
+
 import Auth from "./pages/auth/Auth";
 import Devices from "./pages/devices/Devices";
 import Groups from "./pages/Groups/Groups";
@@ -10,18 +11,84 @@ import UserManagement from "./pages/userManagement/UserManagement";
 import InterfaceConfig from "./pages/interfaceConfigs/InterfaceConfig";
 
 export default function AppRoutes() {
+  // Inline ProtectedRoute
+  const ProtectedRoute = ({ children }) => {
+    const token = localStorage.getItem("authToken");
+    if (!token) return <Navigate to="/login" replace />;
+    return children;
+  };
+
   return (
     <Routes>
-      <Route path="/" element={<Auth />} />
-      <Route path="/dashboard" element={<Dashboard />} />
-      <Route path="/dashboard" element={<Devices />} />
-      <Route path="/devices" element={<Devices />} />
-      <Route path="/groups" element={<Groups />} />
-      <Route path="/interface-config" element={<InterfaceConfig />} />
+      {/* Public route */}
+      <Route path="/login" element={<Auth />} />
 
-      <Route path="/configs" element={<Configs />} />
-      <Route path="/patches" element={<Patches />} />
-      <Route path="/user-management" element={<UserManagement />} />
+      {/* Protected routes */}
+      {/* <Route
+        path="/dashboard"
+        element={
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        }
+      /> */}
+
+      <Route
+        path="/devices"
+        element={
+          <ProtectedRoute>
+            <Devices />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/groups"
+        element={
+          <ProtectedRoute>
+            <Groups />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/interface-config"
+        element={
+          <ProtectedRoute>
+            <InterfaceConfig />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/configs"
+        element={
+          <ProtectedRoute>
+            <Configs />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/patches"
+        element={
+          <ProtectedRoute>
+            <Patches />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/user-management"
+        element={
+          <ProtectedRoute>
+            <UserManagement />
+          </ProtectedRoute>
+        }
+      />
+
+      {/* Optional: redirect unknown routes */}
+      <Route path="*" element={<Navigate to="/groups" replace />} />
     </Routes>
   );
 }
