@@ -223,8 +223,11 @@ const Groups = () => {
       }
     }
     try {
-      // Always send both name and JSON (JSON fields take precedence except for name)
-      const payload = { ...parsedJson, name: newGroupName };
+      // Assign parsedJson to peripheral_configs
+      const payload = { name: newGroupName };
+      if (Object.keys(parsedJson).length > 0) {
+        payload.peripheral_configs = parsedJson;
+      }
       await axiosInstance.post(addNewGroup, payload);
       toast({
         title: "Group added",
@@ -287,60 +290,15 @@ const Groups = () => {
     }
   };
 
-  // Default JSON for editing
-  const defaultEditJson = `{
-  "port": 443,
-  "dev_id": "GXTESTGRIDX",
-  "devkey": "uv56we8hu27pd6w0vks1",
-  "platform": "https://platform.uniqgrid.com",
-  "devsecret": "zbh7w2p24vo25lv5is0u",
-  "lte_config": {
-    "4G_APN": "xxxxxx.gprs.com",
-    "4G_STATE": 1,
-    "4G_SIMPIN": "****",
-    "4G_SIM_TYPE": 0
-  },
-  "wifi_config": {
-    "Wifi_DNS": "8.8.8.8",
-    "Wifi_DHCP": 1,
-    "Wifi_PASS1": "air66670",
-    "Wifi_PASS2": "",
-    "Wifi_PASS3": "",
-    "Wifi_PASS4": "",
-    "Wifi_PASS5": "",
-    "Wifi_SSID1": "Airten_anki_6290",
-    "Wifi_SSID2": "",
-    "Wifi_SSID3": "",
-    "Wifi_SSID4": "",
-    "Wifi_SSID5": "",
-    "Wifi_ENABLE": 1,
-    "Wifi_GATEWAY": "192.168.1.1",
-    "Wifi_STATIC_IP": "192.168.1.50",
-    "Wifi_SUBNET_MASK": "255.255.255.0"
-  },
-  "deviceConfig": 1,
-  "ethernet_config": {
-    "Eth2_DNS": "8.8.8.8",
-    "Eth2_DHCP": 0,
-    "Eth2_STATE": 1,
-    "Eth2_SUBNET": "255.255.255.0",
-    "Eth2_GATEWAY": "192.168.1.1",
-    "Eth2_STATIC_IP": "192.168.1.55"
-  },
-  "modbustcp_config": {
-    "Eth1_DNS": "8.8.8.8",
-    "Eth1_DHCP": 0,
-    "Eth1_STATE": 1,
-    "Eth1_SUBNET": "255.255.255.0",
-    "Eth1_GATEWAY": "192.168.2.1",
-    "Eth1_STATIC_IP": "192.168.2.100"
-  }
-}`;
-
   // Add edit handler
   const handleEditIconClick = (group) => {
     setEditGroup(group.raw);
-    setEditJson(defaultEditJson); // always use default JSON
+    // Show the group's actual peripheral_configs as JSON, or empty if not present
+    setEditJson(
+      group.raw.peripheral_configs
+        ? JSON.stringify(group.raw.peripheral_configs, null, 2)
+        : ""
+    );
     setEditError("");
     setIsEditingGroupName(true);
     setEditedGroupName(group.raw.name || "");
@@ -372,13 +330,14 @@ const Groups = () => {
     }
 
     try {
-      // Prepare payload
-      const payload = { ...parsed };
+      // Assign parsed to peripheral_configs
+      const payload = {};
       if (isEditingGroupName) {
         payload.name = editedGroupName;
       }
+      payload.peripheral_configs = parsed;
 
-      await axiosInstance.patch(
+      await axiosInstance.put(
         editGroupUrl.replace("{group_id}", editGroup.id),
         payload
       );
@@ -666,7 +625,9 @@ const Groups = () => {
         width="30%"
         footer={
           <Button
-            colorScheme="blue"
+            size="sm"
+            colorScheme="purple"
+            variant="outline"
             onClick={handleSubmitGroup}
             isDisabled={
               !newGroupName || !!groupNameError || !!newGroupJsonError
@@ -701,7 +662,7 @@ const Groups = () => {
         <Textarea
           value={newGroupJson}
           onChange={handleNewGroupJsonChange}
-          placeholder="Paste your JSON here (optional)..."
+          placeholder="Paste your JSON here"
           rows={8}
           fontFamily="mono"
           height={"300px"}
@@ -771,7 +732,9 @@ const Groups = () => {
         footer={
           <>
             <Button
-              colorScheme="blue"
+              size="sm"
+              colorScheme="purple"
+              variant="outline"
               onClick={handleEditSubmit}
               isDisabled={
                 !editJson ||
@@ -783,7 +746,14 @@ const Groups = () => {
             >
               Save
             </Button>
-            <Button onClick={() => setEditModalOpen(false)}>Cancel</Button>
+            <Button
+              size="sm"
+              colorScheme="red"
+              variant="outline"
+              onClick={() => setEditModalOpen(false)}
+            >
+              Cancel
+            </Button>
           </>
         }
       >
@@ -823,7 +793,12 @@ const Groups = () => {
         onClose={handleCloseInterfacesModal}
         title="Interface Settings"
         footer={
-          <Button onClick={handleCloseInterfacesModal} colorScheme="purple">
+          <Button
+            onClick={handleCloseInterfacesModal}
+            size="sm"
+            colorScheme="purple"
+            variant="outline"
+          >
             Close
           </Button>
         }

@@ -96,7 +96,10 @@ const Navbar = ({ onOpenMobileSidebar, showMobileMenu }) => {
           src={logoSrc}
           alt="Logo"
           style={{
-            height: colorMode === "light" ? "32px" : "44px",
+            height:
+              colorMode === "light"
+                ? "38px" // Increased size for lighLogo
+                : "44px",
           }}
         />
       </HStack>
@@ -175,6 +178,10 @@ const Navbar = ({ onOpenMobileSidebar, showMobileMenu }) => {
 const Footer = () => {
   const footerBg = useColorModeValue("white", "navy.700");
   const footerText = useColorModeValue("navy.700", "white");
+  const { colorMode } = useColorMode();
+  const logoSrc = colorMode === "light" ? lighLogo : authLogo;
+  // Set logo background only for light mode
+  const logoBg = colorMode === "light" ? "#fff" : "transparent";
   return (
     <Box
       as="footer"
@@ -182,16 +189,28 @@ const Footer = () => {
       h="50px"
       px={6}
       py={3}
-      // borderTop="1px solid #e2e8f0"
       position="fixed"
       left="0"
       right={0}
       bottom={0}
       zIndex={2}
     >
-      <Flex align="center" justify="center" h="100%" ml={20}>
-        <Text fontSize="sm" color={footerText} fontWeight="550"></Text>
-        <Text fontSize="md">UGX.AI</Text>
+      <Flex align="center" justify="center" h="100%" ml={20} gap={2}>
+        {/* Show only one logo based on color mode */}
+        <Text fontSize="sm">Powered by</Text>
+        <img
+          src={logoSrc}
+          alt="Logo"
+          style={{
+            height:
+              colorMode === "light"
+                ? "20px" // Increased size for lighLogo in footer
+                : "24px",
+            marginRight: "8px",
+            borderRadius: "4px",
+            background: logoBg,
+          }}
+        />
       </Flex>
     </Box>
   );

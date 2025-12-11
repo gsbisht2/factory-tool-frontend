@@ -125,7 +125,9 @@ const UserManagement = () => {
         width="30%"
         footer={
           <Button
-            colorScheme="blue"
+            size="sm"
+            colorScheme="purple"
+            variant="outline"
             onClick={handleSubmitUser}
             isDisabled={!email || !password}
           >

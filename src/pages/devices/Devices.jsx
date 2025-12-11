@@ -214,10 +214,16 @@ const Devices = () => {
 
       <GlobalModal
         isOpen={modalOpen}
+        width="30%"
         onClose={() => setModalOpen(false)}
         title={`Change group for ${modalDevice?.deviceId || ""}`}
         footer={
-          <Button colorScheme="teal" onClick={handleSaveGroupChange}>
+          <Button
+            size="sm"
+            colorScheme="purple"
+            variant="outline"
+            onClick={handleSaveGroupChange}
+          >
             Save
           </Button>
         }

@@ -16,4 +16,4 @@ export const addNewGroup = `${FACTORY_TOOL_URL}/api/group/groups/`;
 export const deleteGroup = `${FACTORY_TOOL_URL}/api/group/groups/{group_id}/`;
 export const getUsers = `${FACTORY_TOOL_URL}/api/auth/users/`;
 export const addNewuser = `${FACTORY_TOOL_URL}/api/auth/users/`;
-export const editGroup = `${FACTORY_TOOL_URL}/api/group/groups/{group_id}/modify/`;
+export const editGroup = `${FACTORY_TOOL_URL}/api/group/groups/{group_id}/`;

@@ -7,6 +7,7 @@ import {
   AlertDialogOverlay,
   Button,
   useColorModeValue,
+  CloseButton,
 } from "@chakra-ui/react";
 import { useRef } from "react";
 
@@ -33,7 +34,15 @@ const GlobalAlertDialog = ({
       isCentered
     >
       <AlertDialogOverlay>
-        <AlertDialogContent bg={bg}>
+        <AlertDialogContent bg={bg} position="relative">
+          {/* Cross icon at top-right */}
+          <CloseButton
+            position="absolute"
+            top="12px"
+            right="12px"
+            onClick={onClose}
+            zIndex={1}
+          />
           {title && (
             <AlertDialogHeader fontSize="lg" fontWeight="bold">
               {title}
@@ -45,6 +54,7 @@ const GlobalAlertDialog = ({
               <Button
                 ref={cancelRef}
                 colorScheme="red"
+                size="sm"
                 variant={"outline"}
                 onClick={onClose}
               >
@@ -52,7 +62,9 @@ const GlobalAlertDialog = ({
               </Button>
             )}
             <Button
-              colorScheme="blue"
+              size="sm"
+              colorScheme="purple"
+              variant="outline"
               onClick={onConfirm}
               ml={3}
               isLoading={isLoading}

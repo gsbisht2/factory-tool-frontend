@@ -40,7 +40,7 @@ const ConfigModal = ({ isOpen, onClose, selectedConfig }) => {
       isOpen={isOpen}
       onClose={onClose}
       title={selectedConfig ? `Parameters for ${selectedConfig.name}` : ""}
-      size="6xl"
+      width="80%"
     >
       <GlobalTable
         columns={parameterColumns}
