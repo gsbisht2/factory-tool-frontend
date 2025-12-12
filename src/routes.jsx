@@ -13,7 +13,7 @@ import InterfaceConfig from "./pages/interfaceConfigs/InterfaceConfig";
 export default function AppRoutes() {
   // Inline ProtectedRoute
   const ProtectedRoute = ({ children }) => {
-    const token = localStorage.getItem("authToken");
+    const token = localStorage.getItem("UGXAuthorization");
     if (!token) return <Navigate to="/login" replace />;
     return children;
   };
