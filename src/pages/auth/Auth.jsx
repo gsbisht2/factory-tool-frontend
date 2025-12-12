@@ -35,7 +35,7 @@ const Auth = () => {
   const buttonHoverBg = useColorModeValue("brand.600", "brand.300");
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
-    username: "",
+    email: "",
     password: "",
   });
   const [isLoading, setIsLoading] = useState(false);
@@ -57,7 +57,7 @@ const Auth = () => {
   };
 
   const handleLogin = async () => {
-    if (!formData.username || !formData.password) {
+    if (!formData.email || !formData.password) {
       toast.error("Please fill in all fields");
       return;
     }
@@ -69,8 +69,7 @@ const Auth = () => {
       if (response.status === 200) {
         const data = response.data;
 
-        localStorage.setItem("authToken", data.token);
-        localStorage.setItem("refreshToken", data.refreshToken);
+        localStorage.setItem("UGXAuthorization", data.token);
 
         // Send platform_url instead of token
         // const resp = await axiosInstance.post(getAccessToken, {
@@ -82,8 +81,7 @@ const Auth = () => {
         navigate("/groups", { replace: true });
       }
     } catch (error) {
-      console.error("Login error:", error);
-      const errorMessage = error.response?.data?.message || "Login failed";
+      const errorMessage = error.response?.data?.error || "Login failed";
       toast.error(errorMessage);
     } finally {
       setIsLoading(false);
@@ -122,17 +120,17 @@ const Auth = () => {
         {/* Username */}
         <FormControl isRequired mb="6">
           <FormLabel fontWeight="600" fontSize="md" color={textColor}>
-            Username{" "}
+            Email{" "}
             <Text as="span" color={brandStars}>
               *
             </Text>
           </FormLabel>
           <Input
-            name="username"
+            name="email"
             type="text"
             size="lg"
-            placeholder="Enter your username"
-            value={formData.username}
+            placeholder="Enter your email"
+            value={formData.email}
             onChange={handleInputChange}
             onKeyPress={handleKeyPress}
             _focus={{ borderColor: inputFocusBorder }}

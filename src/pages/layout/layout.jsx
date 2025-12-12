@@ -25,7 +25,7 @@ import { useBreakpointValue, useDisclosure } from "@chakra-ui/react";
 import { FaBars } from "react-icons/fa";
 import { nav } from "framer-motion/client";
 import axiosInstance from "../../api/axiosInstance";
-import { logout as logoutUrl } from "../../api/apiUrls";
+// import { logout as logoutUrl } from "../../api/apiUrls";
 
 const Navbar = ({ onOpenMobileSidebar, showMobileMenu }) => {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -47,22 +47,16 @@ const Navbar = ({ onOpenMobileSidebar, showMobileMenu }) => {
   // Updated logout handler
   const handleLogout = async () => {
     try {
-      await axiosInstance.post(logoutUrl);
+      // await axiosInstance.post(logoutUrl);
 
       // Clear tokens from localStorage
-      localStorage.removeItem("authToken");
-      localStorage.removeItem("refreshToken");
       localStorage.removeItem("UGXAuthorization");
 
-      navigate("/");
-      console.log("Logout successful");
+      navigate("/login");
     } catch (error) {
-      console.error("Logout error:", error);
       // Even if API call fails, clear tokens and redirect
-      localStorage.removeItem("authToken");
-      localStorage.removeItem("refreshToken");
       localStorage.removeItem("UGXAuthorization");
-      navigate("/");
+      navigate("/login");
     }
   };
 
