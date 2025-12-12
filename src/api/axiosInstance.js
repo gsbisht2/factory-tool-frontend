@@ -1,11 +1,14 @@
 import axios from "axios";
 import * as apiUrls from "./apiUrls";
+import Cookies from "js-cookie";
 
 const axiosInstance = axios.create({
   headers: {
     "Content-Type": "application/json",
+    "X-CSRFToken": Cookies.get("csrftoken"),
   },
   timeout: 30000,
+  withCredentials: true,
 });
 
 axiosInstance.interceptors.request.use(

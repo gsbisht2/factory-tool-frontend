@@ -19,6 +19,7 @@
     "apexcharts": "^5.3.5",
     "axios": "^1.12.2",
     "framer-motion": "^12.23.20",
+    "js-cookie": "^3.0.5",
     "react": "^18.2.0",
     "react-apexcharts": "^1.7.0",
     "react-calendar": "^6.0.0",
