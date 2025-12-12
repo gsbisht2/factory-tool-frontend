@@ -65,6 +65,7 @@ const Devices = () => {
           patch: d.patch_name,
           group: d.group_name,
           groupId: d.group_id,
+          createdAt: d.created_at
         }));
         setDevices(mappedDevices);
         setGroups(results.groups || []);
@@ -117,6 +118,7 @@ const Devices = () => {
         cell: (info) => info.getValue() || "-",
       },
       { accessorKey: "patchVersion", header: () => <Text>Patch Version</Text> },
+      { accessorKey: "createdAt", header: () => <Text>Created At</Text> },
       {
         accessorKey: "groupAction",
         header: () => <Text>Group</Text>,
